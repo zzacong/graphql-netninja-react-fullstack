@@ -1,14 +1,18 @@
-require('dotenv').config()
 const express = require('express')
 const { graphqlHTTP } = require('express-graphql')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 const schema = require('./schema/schema')
+const { MongoUri } = require('./config/keys')
 
 const app = express()
 
+// Allow cross origin requests
+app.use(cors())
+
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, {
+mongoose.connect(MongoUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })
@@ -23,7 +27,7 @@ app.use(
   })
 )
 
-const PORT = process.env.PORT || 5000
+const PORT = process.env.PORT || 4000
 app.listen(PORT, () =>
   console.log(`Server is listening on http://localhost:${PORT}`)
 )
