@@ -1,10 +1,10 @@
 import React from 'react'
 import { useQuery } from '@apollo/client'
 
-import { getBookQuery } from '../queries/queries'
+import { GET_BOOK } from '../queries/queries'
 
 const BookDetails = ({ bookId }) => {
-  const { loading, error, data } = useQuery(getBookQuery, {
+  const { loading, error, data } = useQuery(GET_BOOK, {
     variables: { id: bookId },
   })
 
@@ -28,8 +28,6 @@ const BookDetails = ({ bookId }) => {
       <div>No book selected.</div>
     )
   }
-  // data.book.map(book => <p key={book.id}>{book.name}</p>)
-  console.log(data)
 
   return <div id="book-details">{displayBookDetails()}</div>
 }

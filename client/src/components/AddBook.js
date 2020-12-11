@@ -1,18 +1,14 @@
 import React, { useRef } from 'react'
 import { useMutation, useQuery } from '@apollo/client'
 
-import {
-  getAuthorsQuery,
-  getBooksQuery,
-  addBookMutation,
-} from '../queries/queries'
+import { GET_AUTHORS, GET_BOOKS, ADD_BOOK } from '../queries/queries'
 
 const AddBook = () => {
-  const { loading, error, data: authorsData } = useQuery(getAuthorsQuery)
+  const { loading, error, data: authorsData } = useQuery(GET_AUTHORS)
   const [
     addBook,
     { loading: mutationLoading, error: mutationError },
-  ] = useMutation(addBookMutation)
+  ] = useMutation(ADD_BOOK)
   const nameRef = useRef()
   const genreRef = useRef()
   const authorIdRef = useRef()
@@ -35,7 +31,7 @@ const AddBook = () => {
         genre: genreRef.current.value,
         authorId: authorIdRef.current.value,
       },
-      refetchQueries: [{ query: getBooksQuery }],
+      refetchQueries: [{ query: GET_BOOKS }],
     })
   }
 
