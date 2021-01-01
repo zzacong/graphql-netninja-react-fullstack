@@ -32,8 +32,8 @@ const typeDefs = gql`
 
 const resolvers = {
   Query: {
-    book: (parent, args) => Book.findById(args.id),
-    author: (parent, args) => Author.findById(args.id),
+    book: (_parent, args) => Book.findById(args.id),
+    author: (_parent, args) => Author.findById(args.id),
     books: () => Book.find({}),
     authors: () => Author.find({}),
   },
@@ -44,7 +44,7 @@ const resolvers = {
     books: parent => Book.find({ authorId: parent.id }),
   },
   Mutation: {
-    addBook: (parent, args) => {
+    addBook: (_parent, args) => {
       const book = new Book({
         name: args.name,
         genre: args.genre,
@@ -52,7 +52,7 @@ const resolvers = {
       })
       return book.save()
     },
-    addAuthor: (parent, args) => {
+    addAuthor: (_parent, args) => {
       const author = new Author({
         name: args.name,
         age: args.age,
